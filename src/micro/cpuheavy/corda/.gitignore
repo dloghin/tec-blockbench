@@ -1,0 +1,32 @@
+build
+gradle
+.gradle
+*.iml
+out
+logs
+local.properties
+# IDEA
+# Specific files to avoid churn
+.idea/gradle.xml
+.idea/kotlinc.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/inspectionProfiles
+.idea/copyright
+.idea/jsLibraryMappings.xml
+
+# User-specific stuff:
+.idea/tasks.xml
+.idea/dictionaries
+
+# Sensitive or high-churn files:
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+
+# Gradle:
+.idea/libraries
