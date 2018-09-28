@@ -35,12 +35,11 @@ public class StringKVState extends KVState<String,String> implements LinearState
     }
 
     public static StringKVState copyFrom(StringKVState obj) {
-        StringKVState sorterState = new StringKVState(
+        return new StringKVState(
                 obj.getKey(),
                 obj.getValue(),
                 obj.getParties(),
                 new UniqueIdentifier());
-        return sorterState;
     }
 
     @Override

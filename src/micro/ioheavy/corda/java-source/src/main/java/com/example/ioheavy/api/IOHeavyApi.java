@@ -144,12 +144,12 @@ public class IOHeavyApi {
                     .getReturnValue()
                     .get();
 
-            StringKVState sorterState = (StringKVState) signedTx.getTx().getOutput(0);
+            StringKVState state = (StringKVState) signedTx.getTx().getOutput(0);
             final String msg =
                     String.format(
                             "Transaction id %s committed to ledger. State id %s\n",
                             signedTx.getId(),
-                            sorterState.getLinearId().toString());
+                            state.getLinearId().toString());
             return Response.status(CREATED).entity(msg).build();
 
         } catch (Throwable ex) {

@@ -17,15 +17,18 @@ public class StringKVSchemaV1 extends MappedSchema {
     }
 
     @Entity
-    @Table(name = "sorter_states")
+    @Table(name = "string_kv_states")
     public static class PersistentStringKVState extends PersistentState {
         @Column(name = "key")
         private final String key;
+
         @Column(name = "value")
         private final String value;
+
         @Column(name = "participants")
         @ElementCollection
         private final List<String> participants;
+
         @Column(name = "linearId")
         private final String linearId;
 
@@ -49,7 +52,6 @@ public class StringKVSchemaV1 extends MappedSchema {
         public String getKey() { return key; }
 
         public String getValue() { return value; }
-
 
         public List<String> getParticipants() { return participants; }
 
