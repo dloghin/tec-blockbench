@@ -94,7 +94,7 @@ public class SorterApi {
     @GET
     @Path("sorters")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<StateAndRef<SorterState>> getIOUs() {
+    public List<StateAndRef<SorterState>> getStates() {
         return rpcOps.vaultQuery(SorterState.class).getStates();
     }
 

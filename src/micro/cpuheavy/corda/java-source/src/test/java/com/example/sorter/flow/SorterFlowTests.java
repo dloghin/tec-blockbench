@@ -119,14 +119,14 @@ public class SorterFlowTests {
     }
 
     @Test
-    public void flowRecordsTheCorrectIOUInBothPartiesVaults() throws Exception {
+    public void flowRecordsTheCorrectStatesInBothPartiesVaults() throws Exception {
         Integer size = 1000;
         SorterFlow.Initiator flow = new SorterFlow.Initiator(size, SorterContract.Commands.CreateAndSort.CMD_ID, b.getInfo().getLegalIdentities().get(0));
         CordaFuture<SignedTransaction> future = a.startFlow(flow);
         network.runNetwork();
         future.get();
 
-        // We check the recorded IOU in both vaults.
+        // We check the recorded states in both vaults.
         for (StartedMockNode node : ImmutableList.of(a, b)) {
             node.transaction(() -> {
                 List<StateAndRef<SorterState>> sorters = node.getServices().getVaultService().queryBy(SorterState.class).getStates();
