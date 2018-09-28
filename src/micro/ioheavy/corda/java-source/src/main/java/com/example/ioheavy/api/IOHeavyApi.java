@@ -93,7 +93,7 @@ public class IOHeavyApi {
     @GET
     @Path("states")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<StateAndRef<StringKVState>> getIOUs() {
+    public List<StateAndRef<StringKVState>> getStates() {
         return rpcOps.vaultQuery(StringKVState.class).getStates();
     }
 
