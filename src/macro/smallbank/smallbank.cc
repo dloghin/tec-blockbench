@@ -10,6 +10,7 @@
 #include "api_adapters/DB.h"
 #include "api_adapters/SmallBank.h"
 #include "api_adapters/EVMDB.h"
+#include "api_adapters/Corda.h"
 #include "utils/generators.h"
 #include "utils/timer.h"
 #include "utils/statistic.h"
@@ -128,6 +129,8 @@ DB* CreateDB(std::string dbname, std::string endpoint) {
     return SmallBank::GetInstance("SmallbankExample", endpoint); 
   } else if (dbname == "ethereum" || dbname == "parity") {
     return EVMDB::GetInstance(dbname, endpoint); 
+  } else if (dbname == "corda") {
+    return CordaDriver::GetInstance(dbname, endpoint);
   } else {
     return NULL;
   }
