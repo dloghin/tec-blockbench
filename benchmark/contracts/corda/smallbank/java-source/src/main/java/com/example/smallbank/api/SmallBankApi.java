@@ -137,12 +137,26 @@ public class SmallBankApi {
             if (account1 == 0)
                 return Response
                         .status(BAD_REQUEST).entity("Invalid account.\n").build();
-            StateAndRef<SmallBankState> stateAndRef = SmallBankFlow.Initiator.queryState(null, rpcOps, SmallBankState.CheckingsTab, account1);
-            if (stateAndRef != null && stateAndRef.getState().getData() != null) {
-                return Response.status(CREATED).entity("Account balance: " + stateAndRef.getState().getData().getBalance()).build();
+            StateAndRef<SmallBankState> checkingsStateAndRef = SmallBankFlow.Initiator.queryState(null, rpcOps, SmallBankState.CheckingsTab, account1);
+            StateAndRef<SmallBankState> savingsStateAndRef = SmallBankFlow.Initiator.queryState(null, rpcOps, SmallBankState.SavingsTab, account1);
+            boolean notFound = false;
+            int balance = 0;
+            if (checkingsStateAndRef != null && checkingsStateAndRef.getState().getData() != null) {
+                balance += checkingsStateAndRef.getState().getData().getBalance();
+            } else {
+                notFound = true;
             }
-            return Response
-                    .status(BAD_REQUEST).entity("Account not found.\n").build();
+            if (savingsStateAndRef != null && savingsStateAndRef.getState().getData() != null) {
+                balance += savingsStateAndRef.getState().getData().getBalance();
+            } else {
+                notFound = true;
+            }
+
+            if (notFound) {
+                return Response.status(BAD_REQUEST).entity("Account not found.\n").build();
+            } else {
+                return Response.status(CREATED).entity("Account balance: " + balance).build();
+            }
         }
 
         try {
@@ -171,7 +185,7 @@ public class SmallBankApi {
         }
     }
 
-	/**
+    /**
      * Displays all states that are created by Party.
      */
     @GET
