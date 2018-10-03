@@ -10,6 +10,7 @@
 #include <string>
 #include "db/hyperledger_db.h"
 #include "db/evm_db.h"
+#include "db/corda_db.h"
 
 using namespace std;
 using ycsbc::DB;
@@ -30,6 +31,10 @@ DB* DBFactory::CreateDB(utils::Properties& props) {
     int deploy_wait = stoi(props.GetProperty("deploy_wait", "20"));
     string wl_name = props.GetProperty("workload", "donothing");
     return new EVMDB(endpoint, props["dbname"], wl_name, deploy_wait);
+  } else if (props["dbname"] == "corda") {
+	const string endpoint = props["endpoint"];
+	string wl_name = props.GetProperty("workload", "donothing");
+	return new CordaDB(endpoint, wl_name);
   } else {
     return NULL;
   }

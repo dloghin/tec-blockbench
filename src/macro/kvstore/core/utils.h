@@ -56,7 +56,15 @@ inline double RandomDouble(double min = 0.0, double max = 1.0) {
 /// Returns an ASCII code that can be printed to desplay
 ///
 inline char RandomPrintChar() {
-  return rand() % 94 + 33;
+	switch (rand() % 3) {
+	case 0:
+		return rand() % 10 + 48;
+	case 1:
+		return rand() % 26 + 65;
+	case 2:
+		return rand() % 26 + 97;
+	}
+	return rand() % 26 + 97;
 }
 
 class Exception : public std::exception {

@@ -137,25 +137,37 @@ int main(const int argc, const char *argv[]) {
   const int num_threads = stoi(props.GetProperty("threadcount", "1"));
   const int txrate = stoi(props.GetProperty("txrate", "10"));
 
-  utils::Timer<double> stat_timer;
+  utils::Timer<double> timer;
+  timer.Start();
 
   // Loads data
   vector<future<int>> actual_ops;
   int total_ops = stoi(props[ycsbc::CoreWorkload::RECORD_COUNT_PROPERTY]);
+  cerr << "# Total ops: " << total_ops << endl;
   for (int i = 0; i < num_threads; ++i) {
     actual_ops.emplace_back(async(launch::async, DelegateClient, db, &wl,
                                   total_ops / num_threads, true, txrate));
   }
 
-  actual_ops.emplace_back(async(launch::async, StatusThread, props["dbname"],
+  if (props["dbname"] != "corda")
+	  actual_ops.emplace_back(async(launch::async, StatusThread, props["dbname"],
                                 db, BLOCK_POLLING_INTERVAL, current_tip));
+
+  double duration = timer.End();
 
   int sum = 0;
   for (auto &n : actual_ops) {
     assert(n.valid());
     sum += n.get();
   }
+
   cerr << "# Loading records:\t" << sum << endl;
+  cerr << "# Duration: " << duration << endl;
+  cerr << "# Transaction throughput (KTPS)" << endl;
+  cerr << sum / duration / 1000 << endl;
+  cerr << endl;
+
+  return 0;
 }
 
 string ParseCommandLine(int argc, const char *argv[],
@@ -254,6 +266,8 @@ void UsageMessage(const char *command) {
           "ycsb, donothing, smallbank. By default: donothing)" << endl;
   cout << "  -P propertyfile: load properties from the given file. Multiple "
           "files can" << endl;
+  cout << "  -endpoint: endpoint" << endl;
+  cout << "  -txrate rate: set transaction rate" << endl;
   cout << "                   be specified, and will be processed in the order "
           "specified" << endl;
 }
