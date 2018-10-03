@@ -20,6 +20,7 @@
 #include "db/db_factory.h"
 #include "db/evm_db.h"
 #include "db/hyperledger_db.h"
+
 using namespace std;
 
 const unsigned int BLOCK_POLLING_INTERVAL = 2;
@@ -153,13 +154,13 @@ int main(const int argc, const char *argv[]) {
 	  actual_ops.emplace_back(async(launch::async, StatusThread, props["dbname"],
                                 db, BLOCK_POLLING_INTERVAL, current_tip));
 
-  double duration = timer.End();
-
   int sum = 0;
   for (auto &n : actual_ops) {
     assert(n.valid());
     sum += n.get();
   }
+
+  double duration = timer.End();
 
   cerr << "# Loading records:\t" << sum << endl;
   cerr << "# Duration: " << duration << endl;
