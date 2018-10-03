@@ -22,7 +22,7 @@ public class StringKVSchemaV1 extends MappedSchema {
         @Column(name = "key")
         private final String key;
 
-        @Column(name = "value")
+        @Column(name = "value", length = 4096)
         private final String value;
 
         @Column(name = "participants")
