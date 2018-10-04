@@ -1,19 +1,23 @@
 #!/bin/bash
 
+# CMD_PREFIX="xterm -e"
+CMD_PREFIX=""
+
 killall -9 xterm
+killall -9 java
 sleep 3
 cd java-source/build/nodes
 cd PartyA
-xterm -e java -Xmx2048m -jar corda.jar &
-xterm -e java -jar corda-webserver.jar &
+$CMD_PREFIX java -Xmx2048m -jar corda.jar &
+$CMD_PREFIX java -jar corda-webserver.jar &
 cd ..
 cd PartyB
-xterm -e java -Xmx2048m -jar corda.jar &
-xterm -e java -jar corda-webserver.jar &
+$CMD_PREFIX java -Xmx2048m -jar corda.jar &
+$CMD_PREFIX java -jar corda-webserver.jar &
 cd ..
 cd PartyC
-xterm -e java -jar corda.jar &
-xterm -e java -jar corda-webserver.jar &
+$CMD_PREFIX java -jar corda.jar &
+$CMD_PREFIX java -jar corda-webserver.jar &
 cd ..
 cd Notary
-xterm -e java -jar corda.jar &
+$CMD_PREFIX java -jar corda.jar &
