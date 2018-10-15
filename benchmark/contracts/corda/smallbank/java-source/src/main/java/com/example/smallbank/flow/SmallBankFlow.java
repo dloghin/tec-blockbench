@@ -332,7 +332,7 @@ public class SmallBankFlow {
                 checkingsState = checkingsStateAndRef.getState().getData();
             }
             if (checkingsState == null) {
-                checkingsState = new SmallBankState(me, SmallBankState.CheckingsTab, accountId, SmallBankState.DEFAULT_BALANCE, new UniqueIdentifier());
+                newCheckingsState = new SmallBankState(me, SmallBankState.CheckingsTab, accountId, SmallBankState.DEFAULT_BALANCE, new UniqueIdentifier());
             } else {
                 if (amount > (savingsState.getBalance() + checkingsState.getBalance())) {
                     newCheckingsState = SmallBankState.copyFromAdjustBalance(checkingsState, -amount - 1);

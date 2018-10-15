@@ -153,7 +153,7 @@ public class SmallBankApi {
             }
 
             if (notFound) {
-                return Response.status(BAD_REQUEST).entity("Account not found.\n").build();
+                return Response.status(CREATED).entity("Account not found.\n").build();
             } else {
                 return Response.status(CREATED).entity("Account balance: " + balance).build();
             }
