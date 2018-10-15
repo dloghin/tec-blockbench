@@ -135,4 +135,10 @@ public class SorterState implements LinearState, QueryableState {
         return String.format("SorterState(size=%s, contractee=%s, contractor=%s, linearId=%s)",
                 size, contractee, contractor, linearId);
     }
+
+    public static void main(String args[]) {
+        SorterState sorter = new SorterState(1000000, null, null, null, new UniqueIdentifier());
+        sorter.genReverseValues();
+        sorter.sort();
+    }
 }
