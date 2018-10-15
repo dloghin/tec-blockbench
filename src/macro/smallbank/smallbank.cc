@@ -16,7 +16,9 @@
 #include "utils/statistic.h"
 #include "utils/utils.h"
 #include "utils/properties.h"
-//#define IVL 100
+// #define IVL 100
+
+// #define DEBUG 1
 
 using namespace std;
 
@@ -66,6 +68,10 @@ void ClientThread(DB* sb, const int num_ops, const int txrate) {
         sb->WriteCheck(acc_gen.Next(), 0);
         break;
     }
+#ifdef DEBUG
+    if ((i+1) % 10 == 0)
+    	std::cout << "Processed " << i+1 << " transactions." << std::endl;
+#endif
     utils::sleep(tx_sleep_time);
     //sleep(0.1); 
   }
@@ -166,8 +172,8 @@ int main(const int argc, const char* argv[]) {
   for (int i = 0; i < thread_num; ++i) {
     threads.emplace_back(ClientThread, sb, total_ops / thread_num, txrate);
   }
-  threads.emplace_back(StatusThread, sb, props["dbname"], props["endpoint"], BLOCK_POLLING_INTERVAL, current_tip);
-
+  if (props["dbname"] != "corda")
+	  threads.emplace_back(StatusThread, sb, props["dbname"], props["endpoint"], BLOCK_POLLING_INTERVAL, current_tip);
 
   for (auto& th : threads) th.join();
 

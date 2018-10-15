@@ -1,23 +1,22 @@
 #include <restclient-cpp/restclient.h>
 #include "Corda.h"
 
+// #define DEBUG 1
+
 string CordaDriver::get_txn_hash(string response) {
 	return "";
 }
 
 void CordaDriver::send_cmd(Command command, unsigned acc1, unsigned acc2,unsigned amount) {
-	double start_time = time_now();
 	char buff[256];
-	sprintf(buff, "%s%s?command=%d&account1=%d&account2=%d&amount=%d&partyName=PartyB",
+	sprintf(buff, "%s%s?command=%d&account1=%d&account2=%d&amount=%d&partyName=PartyA",
 			endpoint_.c_str(), API_ENDPOINT, command, acc1, acc2, amount);
 	RestClient::Response resp = RestClient::put(buff, REQUEST_HEADERS, "");
 #ifdef DEBUG
+	std::cout << "Corda request: " << buff << std::endl;
 	std::cout << "Corda response: " << resp.body << std::endl;
+	std::cout << "Corda response code: " << resp.code << std::endl;
 #endif
-	string txn_hash = get_txn_hash(resp.body);
-	txlock_->lock();
-	(*pendingtx_)[txn_hash] = start_time;
-	txlock_->unlock();
 }
 
 void CordaDriver::Amalgate(unsigned acc1, unsigned acc2) {

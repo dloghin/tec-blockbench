@@ -4,6 +4,7 @@
 #include "DB.h"
 #include "utils/timer.h"
 #include "utils/utils.h"
+#include <iostream>
 
 #define API_ENDPOINT "/api/smallbank/smallbank"
 
@@ -22,12 +23,14 @@ public:
 	void WriteCheck(unsigned acc, unsigned amount);
 
 	static CordaDriver* GetInstance(std::string dbname, std::string endpoint) {
-		static CordaDriver sb;
+		static CordaDriver sb(endpoint);
 		return &sb;
 	}
 
 	CordaDriver() {}
-	CordaDriver(std::string path, std::string endpoint) {}
+	CordaDriver(std::string endpoint) {
+		endpoint_ = endpoint;
+	}
 
 	void Init(unordered_map<string, double> *pendingtx, SpinLock *lock){
 		pendingtx_ = pendingtx;
