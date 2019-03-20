@@ -33,6 +33,8 @@ func (t *KVStore) Invoke(stub shim.ChaincodeStubInterface) peer.Response {
 		return t.del(stub, args)
   } else if function == "read" {
     return t.read(stub, args)
+  } else if function == "write_multikey" {
+    return t.write_multikey(stub, args) 
 	}
 
   return shim.Error("Received unknown function invocation: " + function)
@@ -52,6 +54,22 @@ func (t *KVStore) write(stub shim.ChaincodeStubInterface, args []string) peer.Re
 	if err != nil {
 		return shim.Error(err.Error())
 	}
+
+	return shim.Success(nil)
+}
+
+func (t *KVStore) write_multikey(stub shim.ChaincodeStubInterface, args []string) peer.Response {
+  if len(args) < 2{
+  	return shim.Error("Incorrect number of arguments. Expecting 2 arguments: key and value")
+  }
+
+  keys := args[:len(args)-1]
+  value := args[len(args)-1]
+  for i := 0; i < len(keys); i++ {
+	  if err := stub.PutState(keys[i], []byte(value)); err!=nil {
+		  return shim.Error(err.Error())
+	  }
+  }
 
 	return shim.Success(nil)
 }
