@@ -1,7 +1,5 @@
-package com.example.flow;
+package com.example.smallbank.flow;
 
-import com.example.example.flow.ExampleFlow;
-import com.example.example.state.IOUState;
 import com.google.common.collect.ImmutableList;
 import net.corda.core.concurrent.CordaFuture;
 import net.corda.core.contracts.ContractState;

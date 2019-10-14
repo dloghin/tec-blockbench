@@ -1,4 +1,4 @@
-package com.example.contract;
+package com.example.smallbank.contract;
 
 import com.example.example.contract.IOUContract;
 import com.example.example.state.IOUState;
