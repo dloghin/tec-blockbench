@@ -23,6 +23,6 @@ sleep $M
 #./start-multi-clients.sh clients_$1 $1 $2
 #./start-multi-clients.sh clients_8 $1 $2
 ./stop-all.sh $1
-
+./collect-logs.sh $1 $3
 sleep 5
 

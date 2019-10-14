@@ -1,11 +1,14 @@
-QUO_HOME=/users/yuecong/blockbench/benchmark/quorum_ibft
+QUO_HOME=/git/blockbench/benchmark/quorum_ibft
+QUO_DATA=/git/blockbench/benchmark/quorum_ibft/data
+GO_PATH=/go
+BENCHMARK=ycsb
+EXE_HOME=$QUO_HOME/../../src/macro/kvstore
+# BENCHMARK=smallbank
+# EXE_HOME=$QUO_HOME/../../src/macro/smallbank
+
+#####################################################
 HOSTS=$QUO_HOME/hosts
 CLIENTS=$QUO_HOME/clients
-QUO_DATA=$QUO_HOME/qdata
-LOG_DIR=$QUO_HOME/logs
-EXE_HOME=$QUO_HOME/../../src/macro/kvstore
-BENCHMARK=ycsb
-#EXE_HOME=$QUO_HOME/../../src/macro/smallbank
-#BENCHMARK=smallbank
-QUORUM=$QUO_HOME/../quorum_raft/quorum/build/bin/geth
+QUORUM=/git/quorum/build/bin/geth
 ADDRESSES=$QUO_HOME/addresses
+LOG_DIR=$QUO_HOME/logs/${BENCHMARK}results_1
