@@ -1,0 +1,11 @@
+QUO_HOME=/users/yuecong/blockbench/benchmark/quorum_ibft
+HOSTS=$QUO_HOME/hosts
+CLIENTS=$QUO_HOME/clients
+QUO_DATA=$QUO_HOME/qdata
+LOG_DIR=$QUO_HOME/logs
+EXE_HOME=$QUO_HOME/../../src/macro/kvstore
+BENCHMARK=ycsb
+#EXE_HOME=$QUO_HOME/../../src/macro/smallbank
+#BENCHMARK=smallbank
+QUORUM=$QUO_HOME/../quorum_raft/quorum/build/bin/geth
+ADDRESSES=$QUO_HOME/addresses
