@@ -1,7 +1,8 @@
-package com.example.smallbank.api;
+package com.example.smallbank.smallbank.api;
 
-import com.example.smallbank.contract.SmallBankContract;
-import com.example.smallbank.state.SmallBankState;
+import com.example.smallbank.smallbank.contract.SmallBankContract;
+import com.example.smallbank.smallbank.flow.SmallBankFlow;
+import com.example.smallbank.smallbank.state.SmallBankState;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import net.corda.core.contracts.StateAndRef;
@@ -14,8 +15,7 @@ import net.corda.core.node.services.vault.Builder;
 import net.corda.core.node.services.vault.CriteriaExpression;
 import net.corda.core.node.services.vault.QueryCriteria;
 import net.corda.core.transactions.SignedTransaction;
-import com.example.smallbank.flow.SmallBankFlow;
-import com.example.smallbank.schema.SmallBankSchemaV1;
+import com.example.smallbank.smallbank.schema.SmallBankSchemaV1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package com.example.smallbank.schema;
+package com.example.smallbank.smallbank.schema;
 
 import com.google.common.collect.ImmutableList;
 import net.corda.core.schemas.MappedSchema;

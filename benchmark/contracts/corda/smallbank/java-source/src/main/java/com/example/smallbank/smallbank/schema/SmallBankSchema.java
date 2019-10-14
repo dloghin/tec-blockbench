@@ -1,3 +1,3 @@
-package com.example.smallbank.schema;
+package com.example.smallbank.smallbank.schema;
 
 public class SmallBankSchema { }

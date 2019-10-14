@@ -1,9 +1,9 @@
-package com.example.smallbank.flow;
+package com.example.smallbank.smallbank.flow;
 
 import co.paralleluniverse.fibers.Suspendable;
-import com.example.smallbank.contract.SmallBankContract;
-import com.example.smallbank.schema.SmallBankSchemaV1;
-import com.example.smallbank.state.SmallBankState;
+import com.example.smallbank.smallbank.contract.SmallBankContract;
+import com.example.smallbank.smallbank.schema.SmallBankSchemaV1;
+import com.example.smallbank.smallbank.state.SmallBankState;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import net.corda.core.contracts.*;

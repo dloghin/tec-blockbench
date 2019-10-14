@@ -1,6 +1,6 @@
-package com.example.smallbank.state;
+package com.example.smallbank.smallbank.state;
 
-import com.example.smallbank.schema.SmallBankSchemaV1;
+import com.example.smallbank.smallbank.schema.SmallBankSchemaV1;
 import com.google.common.collect.ImmutableList;
 import net.corda.core.contracts.LinearState;
 import net.corda.core.contracts.UniqueIdentifier;
@@ -12,7 +12,6 @@ import net.corda.core.schemas.QueryableState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

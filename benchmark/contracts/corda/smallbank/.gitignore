@@ -1,6 +1,7 @@
 build
 .gradle
 *.iml
+*.class
 out
 logs
 local.properties

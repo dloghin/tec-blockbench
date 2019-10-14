@@ -12,7 +12,7 @@ import org.junit.Test;
 import static com.example.example.contract.IOUContract.IOU_CONTRACT_ID;
 import static net.corda.testing.node.NodeTestUtils.ledger;
 
-public class IOUContractTests {
+public class SmallbankContractTests {
     static private final MockServices ledgerServices = new MockServices();
     static private TestIdentity megaCorp = new TestIdentity(new CordaX500Name("MegaCorp", "London", "GB"));
     static private TestIdentity miniCorp = new TestIdentity(new CordaX500Name("MiniCorp", "London", "GB"));

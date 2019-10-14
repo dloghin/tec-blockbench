@@ -1,6 +1,6 @@
-package com.example.smallbank.plugin;
+package com.example.smallbank.smallbank.plugin;
 
-import com.example.smallbank.api.SmallBankApi;
+import com.example.smallbank.smallbank.api.SmallBankApi;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
 import net.corda.core.messaging.CordaRPCOps;

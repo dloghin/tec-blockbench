@@ -1,6 +1,6 @@
-package com.example.smallbank.client;
+package com.example.smallbank.smallbank.client;
 
-import com.example.smallbank.state.SmallBankState;
+import com.example.smallbank.smallbank.state.SmallBankState;
 import net.corda.client.rpc.CordaRPCClient;
 import net.corda.client.rpc.CordaRPCClientConfiguration;
 import net.corda.core.contracts.StateAndRef;

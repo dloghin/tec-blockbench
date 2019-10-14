@@ -1,4 +1,4 @@
-package com.example.smallbank;
+package com.example.smallbank.smallbank;
 
 import com.google.common.collect.ImmutableList;
 import net.corda.core.concurrent.CordaFuture;

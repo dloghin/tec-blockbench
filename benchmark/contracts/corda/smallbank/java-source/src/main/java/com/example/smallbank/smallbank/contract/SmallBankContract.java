@@ -1,6 +1,6 @@
-package com.example.smallbank.contract;
+package com.example.smallbank.smallbank.contract;
 
-import com.example.smallbank.state.SmallBankState;
+import com.example.smallbank.smallbank.state.SmallBankState;
 import net.corda.core.contracts.CommandData;
 import net.corda.core.contracts.Contract;
 import net.corda.core.identity.AbstractParty;
