@@ -32,6 +32,6 @@ if lcnt > 0:
     latency = ltotal/lcnt
 if count > 0:
     tps = float(notx)/(count*2)                                        
-print '{}\n{}'.format(tps, latency)                          
+print 'Throughput {}\nLatency {}'.format(tps, latency)                          
 #for l in latency:                                                              
     #print '{}'.format(l)                
