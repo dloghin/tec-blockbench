@@ -4,6 +4,9 @@ cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
 echo "start-multi-clients.sh"
+for client in `cat $CLIENTS`; do
+        ssh -oStrictHostKeyChecking=no $client "rm -rf $LOG_DIR"
+done
 let i=0
 let IDX=$1
 for client in `cat $CLIENTS`; do
@@ -36,7 +39,7 @@ if [[ $5 == "-drop" ]]; then
     let i=$i+1
   done
 else
-  let M=$2*10+320
+  let M=$2*10+240
   echo "run for $M"
   sleep $M
   for client in `cat $CLIENTS`; do

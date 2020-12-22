@@ -9,7 +9,8 @@ echo "run-bench.sh"
 ./init-all.sh $1 
 ./start-all.sh $1 
 
-let M=5*$1
+#let M=5*$1
+let M=30
 #240+40*$1 
 echo "sleep $M"
 sleep $M

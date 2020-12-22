@@ -16,6 +16,7 @@ for host in `cat $HOSTS`; do
     cd $EXE_HOME
     #both ycsbc and smallbank use the same driver
     #-P workloads/workloada.spec for smallbank
+    mkdir -p $LOG_DIR
     if [[ $BENCHMARK == 'ycsb' ]]; then
       nohup ./driver -db ethereum -threads $1 -P workloads/workloadb.spec -endpoint $host:8000 -txrate $4 -wl ycsb -wt 120 > $LOG_DIR/client_$host"_"$1 2>&1 &
     elif [[ $BENCHMARK == 'smallbank' ]]; then

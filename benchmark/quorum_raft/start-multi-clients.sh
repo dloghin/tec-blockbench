@@ -4,6 +4,9 @@ cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
 echo "start-multi-clients.sh"
+for client in `cat $CLIENTS`; do
+	ssh -oStrictHostKeyChecking=no $client "rm -rf $LOG_DIR"
+done
 let i=0
 let IDX=$1
 for client in `cat $CLIENTS`; do
