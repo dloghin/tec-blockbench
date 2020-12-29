@@ -1,0 +1,50 @@
+{
+    "config": {
+        "chainId": 10,
+        "homesteadBlock": 0,
+        "eip150Block": 0,
+        "eip150Hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "eip155Block": 0,
+        "eip158Block": 0,
+        "byzantiumBlock": 0,
+        "constantinopleBlock": 0,
+        "istanbul": {
+            "epoch": 30000,
+            "policy": 0,
+            "ceil2Nby3Block": 0
+        },
+        "txnSizeLimit": 64,
+        "maxCodeSize": 0,
+        "isQuorum": true
+    },
+    "nonce": "0x0",
+    "timestamp": "0x5fea9bbe",
+    "extraData": "0x0000000000000000000000000000000000000000000000000000000000000000f8c4f87e940cbfd99c1284df04aad2c43c04117a9b9575015b94cb7c4f9be9efac09eab04326455cdbc6c358c1bc94fc611a57643e9e1133c14b2a9306a70087c9de5994d90cd3a1766ac03d2ae2ec9c2fe4df2ebea9ce2594c50a100e914bf7809ec2172b2f57661db7044e2a9484a5d1a780a4205ca748f0a20ebd3960f15a7f18b8410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c0",
+    "gasLimit": "0xe0000000",
+    "difficulty": "0x1",
+    "mixHash": "0x63746963616c2062797a616e74696e65206661756c7420746f6c6572616e6365",
+    "coinbase": "0x0000000000000000000000000000000000000000",
+    "alloc": {
+        "0cbfd99c1284df04aad2c43c04117a9b9575015b": {
+            "balance": "0x446c3b15f9926687d2c40534fdb564000000000000"
+        },
+        "84a5d1a780a4205ca748f0a20ebd3960f15a7f18": {
+            "balance": "0x446c3b15f9926687d2c40534fdb564000000000000"
+        },
+        "c50a100e914bf7809ec2172b2f57661db7044e2a": {
+            "balance": "0x446c3b15f9926687d2c40534fdb564000000000000"
+        },
+        "cb7c4f9be9efac09eab04326455cdbc6c358c1bc": {
+            "balance": "0x446c3b15f9926687d2c40534fdb564000000000000"
+        },
+        "d90cd3a1766ac03d2ae2ec9c2fe4df2ebea9ce25": {
+            "balance": "0x446c3b15f9926687d2c40534fdb564000000000000"
+        },
+        "fc611a57643e9e1133c14b2a9306a70087c9de59": {
+            "balance": "0x446c3b15f9926687d2c40534fdb564000000000000"
+        }
+    },
+    "number": "0x0",
+    "gasUsed": "0x0",
+    "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+}
