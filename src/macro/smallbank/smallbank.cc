@@ -11,6 +11,8 @@
 #include "api_adapters/SmallBank.h"
 #include "api_adapters/EVMDB.h"
 #include "api_adapters/Corda.h"
+#include "api_adapters/Fabric.h"
+#include "api_adapters/FabricV2.h"
 #include "utils/generators.h"
 #include "utils/timer.h"
 #include "utils/statistic.h"
@@ -134,7 +136,11 @@ DB* CreateDB(std::string dbname, std::string endpoint) {
   if (dbname == "hyperledger") {
     return SmallBank::GetInstance("SmallbankExample", endpoint); 
   } else if (dbname == "ethereum" || dbname == "parity") {
-    return EVMDB::GetInstance(dbname, endpoint); 
+    return EVMDB::GetInstance(dbname, endpoint);
+  } else if (dbname == "fabric-v1.4") {
+    return Fabric::GetInstance(dbname, endpoint); 
+  } else if (dbname == "fabric-v2.2") {
+    return FabricV2::GetInstance(dbname, endpoint); 
   } else if (dbname == "corda") {
     return CordaDriver::GetInstance(dbname, endpoint);
   } else {

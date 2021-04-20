@@ -1,21 +1,23 @@
-#ifndef BLOCKBENCH_HYPERLEDGER_DB_H_
-#define BLOCKBENCH_HYPERLEDGER_DB_H_
+#ifndef BLOCKBENCH_FABRICV2_DB_H_
+#define BLOCKBENCH_FABRICV2_DB_H_
 
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 #include "core/properties.h"
 #include "core/timer.h"
 #include "core/utils.h"
 #include "core/db.h"
-#include "core/hyperledger_utils.h"
+#include "core/bb_utils.h"
+#include "core/fabricv2_utils.h"
 
 namespace ycsbc {
 
-class HyperLedgerDB : public DB {
+class FabricV2DB : public DB {
  public:
-  HyperLedgerDB(const std::string &endpoint, const std::string &wl_name);
+  FabricV2DB(const std::string &endpoints, const std::string &wl_name);
 
   void Init(std::unordered_map<std::string, double> *pendingtx,
             SpinLock *lock) {
@@ -45,6 +47,24 @@ class HyperLedgerDB : public DB {
   std::vector<std::string> PollTxn(int block_number);
 
  private:
+  inline void addresses(std::string* blkServiceAddr, std::vector<std::string>* txnServiceAddrs) {
+    // std::cout << "endpoint: " << this->endpoint_ << std::endl;
+    auto pos = this->endpoint_.find(",");
+    *blkServiceAddr = this->endpoint_.substr(0, pos);
+    if (txnServiceAddrs != NULL)  {
+      std::string remains = this->endpoint_.substr(pos+1);
+      std::string delimiter = ",";
+
+      size_t pos = 0;
+      while ((pos = remains.find(delimiter)) != std::string::npos) {
+          std::string txnServiceAddr = remains.substr(0, pos);
+          txnServiceAddrs->push_back(txnServiceAddr);
+          remains.erase(0, pos + delimiter.length());
+      }
+      txnServiceAddrs->push_back(remains);
+    }
+  }
+
   std::string endpoint_;
   std::unordered_map<std::string, double> *pendingtx_;
   SpinLock *txlock_;
@@ -54,4 +74,4 @@ class HyperLedgerDB : public DB {
 
 }  // ycsbc
 
-#endif  // BLOCKBENCH_HYPERLEDGER_DB_H_
+#endif  // BLOCKBENCH_FABRICV2_DB_H_

@@ -10,7 +10,7 @@
 #include "bb_utils.h"
 
 namespace BBUtils {
-namespace HLUtils {
+namespace FABV2Utils {
 
 void deploy_chain_code(const std::string &endpoint, SmartContractType type);
 
@@ -40,7 +40,7 @@ int get_tip_block_number(const std::string &endpoint);
 std::vector<std::string> poll_txs_by_block_number(const std::string &endpoint,
                                                   int block_number);
 
-}  //  HLUtils
+}  //  FABV2Utils
 }  //  BBUtils
 
 #endif  // BLOCKBENCH_HYPERLEDGER_UTILS_H_

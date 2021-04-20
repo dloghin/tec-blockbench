@@ -22,8 +22,8 @@
 #include "db/hyperledger_db.h"
 using namespace std;
 
-const unsigned int BLOCK_POLLING_INTERVAL = 10;
-const unsigned int CONFIRM_BLOCK_LENGTH = 1;
+const unsigned int BLOCK_POLLING_INTERVAL = 2;
+const unsigned int CONFIRM_BLOCK_LENGTH = 5;
 const unsigned int HL_CONFIRM_BLOCK_LENGTH = 1;
 const unsigned int PARITY_CONFIRM_BLOCK_LENGTH = 1;
 
@@ -115,6 +115,7 @@ int StatusThread(string dbname, ycsbc::DB *db, double interval,
     utils::sleep(interval - (end_time - start_time) / 1000000000.0);
     // std::this_thread::sleep_for(std::chrono::seconds(5));
   }
+  return 0;
 }
 
 int main(const int argc, const char *argv[]) {

@@ -1,5 +1,5 @@
-#ifndef SMARTCONTRACT_DRIVERS_SMALLBANK_H_
-#define SMARTCONTRACT_DRIVERS_SMALLBANK_H_
+#ifndef SMARTCONTRACT_DRIVERS_FABRIC_H_
+#define SMARTCONTRACT_DRIVERS_FABRIC_H_
 
 #include <string>
 #include "DB.h"
@@ -13,7 +13,7 @@ using std::unordered_map;
 using std::string; 
 using std::vector; 
 
-class SmallBank : public DB {
+class Fabric : public DB {
  public:
   void Amalgate(unsigned acc1, unsigned acc2);
   void GetBalance(unsigned acc);
@@ -21,15 +21,17 @@ class SmallBank : public DB {
   void UpdateSaving(unsigned acc, unsigned amount);
   void SendPayment(unsigned acc1, unsigned acc2, unsigned amount);
   void WriteCheck(unsigned acc, unsigned amount);
+  void deploy(const std::string& path, const std::string& endpoint);
 
-  static SmallBank* GetInstance(std::string path, std::string endpoint) {
-    static SmallBank sb;
-    sb.deploy(path, endpoint);
-    return &sb;
+  static Fabric* GetInstance(std::string path, std::string endpoint) {
+    static Fabric fabric;
+    fabric.deploy(path, endpoint);
+    fabric.endpoint_ = endpoint;
+    return &fabric;
   }
 
-  SmallBank() {}
-  SmallBank(std::string path, std::string endpoint) {
+  Fabric() {}
+  Fabric(std::string path, std::string endpoint) {
     deploy(path, endpoint); 
   }
 
@@ -38,16 +40,22 @@ class SmallBank : public DB {
     txlock_ = lock;
   }
 
-  ~SmallBank() {}
+  // ~Fabric() {}
 
   int get_tip_block_number();
   vector<string> poll_tx(int block_number);
-  int find_tip(string json);
-  vector<string> find_tx(string json); 
-  string get_json_field(const string &json, const string &key); 
  private:
-  void deploy(const std::string& path, const std::string& endpoint);
   void add_to_queue(string json); 
+  std::string exec(const char* cmd);
+
+  inline void addresses(std::string* ordererAddr, std::string* peerAddr) {
+    // std::cout << "endpoint: " << this->endpoint_ << std::endl;
+    auto pos = this->endpoint_.find(",");
+    *ordererAddr = this->endpoint_.substr(0, pos);
+    *peerAddr = this->endpoint_.substr(pos+1);
+  }
+
+
   std::string chaincode_name_, endpoint_;
   unordered_map<string, double> *pendingtx_; 
   SpinLock *txlock_; 

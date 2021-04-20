@@ -39,7 +39,7 @@ public:
 
 	~CordaDriver() {}
 
-	unsigned int get_tip_block_number();
+	int get_tip_block_number();
 	vector<string> poll_tx(int block_number);
 
 private:

@@ -94,7 +94,7 @@ int CordaDB::Delete(const string &table, const string &key) {
 	return DB::kOK;
 }
 
-unsigned int CordaDB::GetTip() { return 0; }
+int CordaDB::GetTip() { return 0; }
 
 // get all tx from the start_block until latest
 vector<string> CordaDB::PollTxn(int block_number) {

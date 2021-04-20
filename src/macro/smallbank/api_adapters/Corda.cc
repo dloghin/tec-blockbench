@@ -53,7 +53,7 @@ void CordaDriver::add_to_queue(string response){
   txlock_->unlock();
 }
 
-unsigned int CordaDriver::get_tip_block_number() {
+int CordaDriver::get_tip_block_number() {
 	return 0;
 }
 

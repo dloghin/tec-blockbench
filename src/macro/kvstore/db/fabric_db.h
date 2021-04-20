@@ -1,5 +1,5 @@
-#ifndef BLOCKBENCH_HYPERLEDGER_DB_H_
-#define BLOCKBENCH_HYPERLEDGER_DB_H_
+#ifndef BLOCKBENCH_FABRIC_DB_H_
+#define BLOCKBENCH_FABRIC_DB_H_
 
 #include <iostream>
 #include <string>
@@ -9,13 +9,13 @@
 #include "core/timer.h"
 #include "core/utils.h"
 #include "core/db.h"
-#include "core/hyperledger_utils.h"
+#include "core/bb_utils.h"
 
 namespace ycsbc {
 
-class HyperLedgerDB : public DB {
+class FabricDB : public DB {
  public:
-  HyperLedgerDB(const std::string &endpoint, const std::string &wl_name);
+  FabricDB(const std::string &endpoint, const std::string &wl_name);
 
   void Init(std::unordered_map<std::string, double> *pendingtx,
             SpinLock *lock) {
@@ -45,6 +45,13 @@ class HyperLedgerDB : public DB {
   std::vector<std::string> PollTxn(int block_number);
 
  private:
+  inline void addresses(std::string* ordererAddr, std::string* peerAddr) {
+    // std::cout << "endpoint: " << this->endpoint_ << std::endl;
+    auto pos = this->endpoint_.find(",");
+    *ordererAddr = this->endpoint_.substr(0, pos);
+    *peerAddr = this->endpoint_.substr(pos+1);
+  }
+
   std::string endpoint_;
   std::unordered_map<std::string, double> *pendingtx_;
   SpinLock *txlock_;
@@ -54,4 +61,4 @@ class HyperLedgerDB : public DB {
 
 }  // ycsbc
 
-#endif  // BLOCKBENCH_HYPERLEDGER_DB_H_
+#endif  // BLOCKBENCH_FABRIC_DB_H_
