@@ -1,0 +1,51 @@
+{
+  "certificateAuthorities": {
+    "ca.org2.example.com": {
+      "caName": "ca-org2", 
+      "httpOptions": {
+        "verify": false
+      }, 
+      "tlsCACerts": {
+        "pem": [
+          "-----BEGIN CERTIFICATE-----\nMIICUTCCAfigAwIBAgIRAMaw/NeMxhlLkGQWsyRIiK0wCgYIKoZIzj0EAwIwczEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xGTAXBgNVBAoTEG9yZzIuZXhhbXBsZS5jb20xHDAaBgNVBAMTE2Nh\nLm9yZzIuZXhhbXBsZS5jb20wHhcNMjAxMjE2MTEzMzAwWhcNMzAxMjE0MTEzMzAw\nWjBzMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMN\nU2FuIEZyYW5jaXNjbzEZMBcGA1UEChMQb3JnMi5leGFtcGxlLmNvbTEcMBoGA1UE\nAxMTY2Eub3JnMi5leGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IA\nBAxYVddjuOBFFR4GGxCODpJoJoNlD19LkdxC2/n4bVTGLdk4KdpZyTC86lg692Ui\njIUGfQam+oMmkJjStc4tShujbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAU\nBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQg\nGQyGsfr5fPtUwwQK6ODQZ2p7ue5VbIDtkyq4elEswJ0wCgYIKoZIzj0EAwIDRwAw\nRAIgLm7nBHJEYCivgWPSxvVRU2TjRhlxZM/OQydye2GXI4gCIAdeCCdugGqYS5yn\nNTYORlfUusRm6XvrWbFXQdPOJ2J/\n-----END CERTIFICATE-----\n"
+        ]
+      }, 
+      "url": "https://slave-5:7054"
+    }
+  }, 
+  "client": {
+    "connection": {
+      "timeout": {
+        "peer": {
+          "endorser": "300"
+        }
+      }
+    }, 
+    "organization": "Org2"
+  }, 
+  "name": "test-network-org2", 
+  "organizations": {
+    "Org2": {
+      "certificateAuthorities": [
+        "ca.org2.example.com"
+      ], 
+      "mspid": "Org2MSP", 
+      "peers": [
+        "slave-5.org2.example.com"
+      ]
+    }
+  }, 
+  "peers": {
+    "slave-5.org2.example.com": {
+      "grpcOptions": {
+        "hostnameOverride": "slave-5.org2.example.com", 
+        "ssl-target-name-override": "slave-5.org2.example.com"
+      }, 
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICVjCCAf2gAwIBAgIQFspNXYBnOv1wIQebSKX9DjAKBggqhkjOPQQDAjB2MQsw\nCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy\nYW5jaXNjbzEZMBcGA1UEChMQb3JnMi5leGFtcGxlLmNvbTEfMB0GA1UEAxMWdGxz\nY2Eub3JnMi5leGFtcGxlLmNvbTAeFw0yMDEyMTYxMTMzMDBaFw0zMDEyMTQxMTMz\nMDBaMHYxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQH\nEw1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBvcmcyLmV4YW1wbGUuY29tMR8wHQYD\nVQQDExZ0bHNjYS5vcmcyLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D\nAQcDQgAEnApttxZ00ulKQru5Bjdjjb4JKYuHU1s6qBkuyF2+7EeDkPHroTZAEC4e\ngW2aGAGhP3F848hnaCmUllS/MC90nqNtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1Ud\nJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1Ud\nDgQiBCDanlX12SU5iZB2hd0vuk1Y+sSZhCco4MtKjfCeOg8vhTAKBggqhkjOPQQD\nAgNHADBEAiAPjcmWZSpMQkzBWoKQG3auXY2DrH5hYvV3/ESVCrHVxQIgSY9E7Ss1\npCgKWWVAzbI1wKdo9CJezaRTymIWx9i2iY4=\n-----END CERTIFICATE-----\n"
+      }, 
+      "url": "grpcs://slave-5:7051"
+    }
+  }, 
+  "version": "1.0.0"
+}

@@ -1,0 +1,51 @@
+{
+  "certificateAuthorities": {
+    "ca.org1.example.com": {
+      "caName": "ca-org1", 
+      "httpOptions": {
+        "verify": false
+      }, 
+      "tlsCACerts": {
+        "pem": [
+          "-----BEGIN CERTIFICATE-----\nMIICUjCCAfigAwIBAgIRAImhimzywarWJgvrUWyQQW8wCgYIKoZIzj0EAwIwczEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xGTAXBgNVBAoTEG9yZzEuZXhhbXBsZS5jb20xHDAaBgNVBAMTE2Nh\nLm9yZzEuZXhhbXBsZS5jb20wHhcNMjAxMjE2MTEzMzAwWhcNMzAxMjE0MTEzMzAw\nWjBzMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMN\nU2FuIEZyYW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEcMBoGA1UE\nAxMTY2Eub3JnMS5leGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IA\nBOtSU8xB/0GEDIM1U0w5V7CMwU3mJnmoVrx1Tc6njRE0UqiaZW9tM0WAvv/3K7PX\n8r4oZoOaaN1ooO/GxeKFjOCjbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAU\nBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQg\nkjVAehh+AoO2OG7U/mfd2J4szT3mUfSW6K+uhEUqNa8wCgYIKoZIzj0EAwIDSAAw\nRQIgNfieabu7Rh4ntznp5FUN5zaikOY919vm4+Pgw9HUju4CIQCwhZ5s3tsvDliP\nthEQxrv+kHwx2IrU4RCGMTBaKSpDow==\n-----END CERTIFICATE-----\n"
+        ]
+      }, 
+      "url": "https://slave-4:7054"
+    }
+  }, 
+  "client": {
+    "connection": {
+      "timeout": {
+        "peer": {
+          "endorser": "300"
+        }
+      }
+    }, 
+    "organization": "Org1"
+  }, 
+  "name": "test-network-org1", 
+  "organizations": {
+    "Org1": {
+      "certificateAuthorities": [
+        "ca.org1.example.com"
+      ], 
+      "mspid": "Org1MSP", 
+      "peers": [
+        "slave-4.org1.example.com"
+      ]
+    }
+  }, 
+  "peers": {
+    "slave-4.org1.example.com": {
+      "grpcOptions": {
+        "hostnameOverride": "slave-4.org1.example.com", 
+        "ssl-target-name-override": "slave-4.org1.example.com"
+      }, 
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\nMIICVzCCAf2gAwIBAgIQIENtlLeZMXHY8Ll6+h3gpzAKBggqhkjOPQQDAjB2MQsw\nCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy\nYW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEfMB0GA1UEAxMWdGxz\nY2Eub3JnMS5leGFtcGxlLmNvbTAeFw0yMDEyMTYxMTMzMDBaFw0zMDEyMTQxMTMz\nMDBaMHYxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQH\nEw1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBvcmcxLmV4YW1wbGUuY29tMR8wHQYD\nVQQDExZ0bHNjYS5vcmcxLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D\nAQcDQgAE0nHYLeVpDppqL4AW6WiZ3+blEBNKjyjrdLnpgMXGkoGVy33FUWCCQj2H\nlqkf40IfiXrwkZQRiRqRo54fVgDoQaNtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1Ud\nJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1Ud\nDgQiBCCepc3r9qu5pXwwLDfXpyanooJoMnTkeoJ5kbkUDi9GJzAKBggqhkjOPQQD\nAgNIADBFAiEAg+vjMD7sHo4DLwtia8+ARss4cMuqys5XDj9K6VlgNpgCIEkjsgrl\nYac23YkrxMZTcJea6N5x826gbqSBOdxqbR7i\n-----END CERTIFICATE-----\n"
+      }, 
+      "url": "grpcs://slave-4:7051"
+    }
+  }, 
+  "version": "1.0.0"
+}

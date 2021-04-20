@@ -1,0 +1,21 @@
+OrdererOrgs:
+- Domain: example.com
+  Name: Orderer
+  Specs:
+  - Hostname: slave-30
+  - Hostname: slave-31
+  - Hostname: slave-32
+PeerOrgs:
+- Domain: org1.example.com
+  EnableNodeOUs: true
+  Name: Org1
+  Specs:
+  - Hostname: slave-4
+  Users: &id001
+    Count: 1
+- Domain: org2.example.com
+  EnableNodeOUs: true
+  Name: Org2
+  Specs:
+  - Hostname: slave-5
+  Users: *id001

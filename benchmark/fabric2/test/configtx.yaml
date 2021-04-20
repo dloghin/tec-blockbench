@@ -1,0 +1,184 @@
+Application:
+  Capabilities:
+    V1_1: false
+    V1_2: false
+    V1_3: false
+    V1_4_2: true
+    V2_0: true
+  Organizations: null
+  Policies: &id003
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Endorsement:
+      Rule: MAJORITY Endorsement
+      Type: ImplicitMeta
+    LifecycleEndorsement:
+      Rule: MAJORITY Endorsement
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+Capabilities:
+  Application:
+    V1_1: false
+    V1_2: false
+    V1_3: false
+    V1_4_2: true
+    V2_0: true
+  Global:
+    V1_1: false
+    V1_3: false
+    V1_4_3: true
+    V2_0: true
+  Orderer:
+    V1_1: false
+    V1_4_2: true
+    V2_0: true
+Channel:
+  Capabilities: &id004
+    V1_1: false
+    V1_3: false
+    V1_4_3: true
+    V2_0: true
+  Policies: &id005
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+Orderer:
+  BatchSize: &id007
+    AbsoluteMaxBytes: 99 MB
+    MaxMessageCount: 500
+    PreferredMaxBytes: 51200 KB
+  BatchTimeout: 2s
+  EtcdRaft: &id008
+    Consenters:
+    - ClientTLSCert: /users/ruanpc/fabric_mvp/test/crypto_config/ordererOrganizations/example.com/orderers/slave-30.example.com/tls/server.crt
+      Host: slave-30
+      Port: 7050
+      ServerTLSCert: /users/ruanpc/fabric_mvp/test/crypto_config/ordererOrganizations/example.com/orderers/slave-30.example.com/tls/server.crt
+    - ClientTLSCert: /users/ruanpc/fabric_mvp/test/crypto_config/ordererOrganizations/example.com/orderers/slave-31.example.com/tls/server.crt
+      Host: slave-31
+      Port: 7050
+      ServerTLSCert: /users/ruanpc/fabric_mvp/test/crypto_config/ordererOrganizations/example.com/orderers/slave-31.example.com/tls/server.crt
+    - ClientTLSCert: /users/ruanpc/fabric_mvp/test/crypto_config/ordererOrganizations/example.com/orderers/slave-32.example.com/tls/server.crt
+      Host: slave-32
+      Port: 7050
+      ServerTLSCert: /users/ruanpc/fabric_mvp/test/crypto_config/ordererOrganizations/example.com/orderers/slave-32.example.com/tls/server.crt
+  OrdererType: etcdraft
+  Organizations: null
+  Policies: &id010
+    Admins:
+      Rule: MAJORITY Admins
+      Type: ImplicitMeta
+    BlockValidation:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+    Readers:
+      Rule: ANY Readers
+      Type: ImplicitMeta
+    Writers:
+      Rule: ANY Writers
+      Type: ImplicitMeta
+Organizations:
+- &id009
+  ID: OrdererMSP
+  MSPDir: /users/ruanpc/fabric_mvp/test/crypto_config/ordererOrganizations/example.com/msp
+  Name: OrdererOrg
+  OrdererEndpoints:
+  - slave-30:7050
+  - slave-31:7050
+  - slave-32:7050
+  Policies:
+    Admins:
+      Rule: OR('OrdererMSP.admin')
+      Type: Signature
+    Readers:
+      Rule: OR('OrdererMSP.member')
+      Type: Signature
+    Writers:
+      Rule: OR('OrdererMSP.member')
+      Type: Signature
+- &id001
+  AnchorPeers:
+  - Host: slave-4
+    Port: 7051
+  ID: Org1MSP
+  MSPDir: /users/ruanpc/fabric_mvp/test/crypto_config/peerOrganizations/org1.example.com/msp
+  Name: Org1MSP
+  Policies:
+    Admins:
+      Rule: OR('Org1MSP.admin')
+      Type: Signature
+    Endorsement:
+      Rule: OR('Org1MSP.peer')
+      Type: Signature
+    Readers:
+      Rule: OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')
+      Type: Signature
+    Writers:
+      Rule: OR('Org1MSP.admin', 'Org1MSP.client')
+      Type: Signature
+- &id002
+  AnchorPeers:
+  - Host: slave-5
+    Port: 7051
+  ID: Org2MSP
+  MSPDir: /users/ruanpc/fabric_mvp/test/crypto_config/peerOrganizations/org2.example.com/msp
+  Name: Org2MSP
+  Policies:
+    Admins:
+      Rule: OR('Org2MSP.admin')
+      Type: Signature
+    Endorsement:
+      Rule: OR('Org2MSP.peer')
+      Type: Signature
+    Readers:
+      Rule: OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')
+      Type: Signature
+    Writers:
+      Rule: OR('Org2MSP.admin', 'Org2MSP.client')
+      Type: Signature
+Profiles:
+  OrgsChannel:
+    Application:
+      Capabilities:
+        V1_1: false
+        V1_2: false
+        V1_3: false
+        V1_4_2: true
+        V2_0: true
+      Organizations: &id006
+      - *id001
+      - *id002
+      Policies: *id003
+    Capabilities: *id004
+    Consortium: SampleConsortium
+    Policies: *id005
+  OrgsOrdererGenesis:
+    Capabilities: *id004
+    Consortiums:
+      SampleConsortium:
+        Organizations: *id006
+    Orderer:
+      BatchSize: *id007
+      BatchTimeout: 2s
+      Capabilities:
+        V1_1: false
+        V1_4_2: true
+        V2_0: true
+      EtcdRaft: *id008
+      OrdererType: etcdraft
+      Organizations:
+      - *id009
+      Policies: *id010
+    Policies: *id005

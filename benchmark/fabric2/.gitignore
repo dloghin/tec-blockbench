@@ -1,0 +1,7 @@
+vendor/
+go.sum
+log.txt
+*.pyc
+*.tar.gz
+node_modules
+package-lock.json
