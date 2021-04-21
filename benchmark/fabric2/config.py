@@ -3,7 +3,7 @@ import os
 cur_dir = os.path.dirname(os.path.abspath(__file__))
 peer_exec = os.path.join(cur_dir, "bin", "peer")
 FABRIC_CFG_DIR=os.path.join(cur_dir, "fabric-config")
-MY_DATA_DIR = "/data/ruanpc"
+MY_DATA_DIR = "/home/ubuntu/fabric_data"
 
 ORDERER_PORT=7050
 ORDERER_DATA=os.path.join(MY_DATA_DIR, "hyperledger/production/orderer")
