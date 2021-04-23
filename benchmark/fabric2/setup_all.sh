@@ -49,6 +49,6 @@ python network.py $NETWORK_DIR on
 deploy
 
 for PEER in $PEERS; do
-	ssh $PEER "PATH=$PATH:$NODEJS_BIN && cd $SRC_DIR && nohup node blockbench/txn-server.js $NETWORK_DIR $ORG_ID $CHANNEL $CC_NAME $MODE 8801 > txn-server-$PEER.log 2>&1 &"
-	ssh $PEER "PATH=$PATH:$NODEJS_BIN && cd $SRC_DIR && nohup node blockbench/block-server.js $NETWORK_DIR $ORG_ID $CHANNEL 8800 > block-server-$PEER.log 2>&1 &"
+	ssh $PEER "PATH=$PATH:$NODEJS_DIR && cd $SRC_DIR && nohup node blockbench/txn-server.js $NETWORK_DIR $ORG_ID $CHANNEL $CC_NAME $MODE 8801 > txn-server-$PEER.log 2>&1 &"
+	ssh $PEER "PATH=$PATH:$NODEJS_DIR && cd $SRC_DIR && nohup node blockbench/block-server.js $NETWORK_DIR $ORG_ID $CHANNEL 8800 > block-server-$PEER.log 2>&1 &"
 done
