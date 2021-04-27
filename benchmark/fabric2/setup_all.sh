@@ -27,7 +27,7 @@ done
 
 function deploy {
 
-./setup_channel.sh $NETWORK_DIR $CHANNEL
+./setup_channel.sh $NETWORK_DIR $CHANNEL 5
 
 for IDX in `seq ${PEER_COUNT}`; do
    ALL_ORG="$ALL_ORG 'Org${IDX}MSP.peer'"
@@ -44,11 +44,11 @@ ENDORSE_POLICY="AND($(join_by , $ALL_ORG))"
 
 python network.py $NETWORK_DIR on
 
-./setup_channel.sh $NETWORK_DIR $CHANNEL
+sleep 30
 
 deploy
 
 for PEER in $PEERS; do
-	ssh $PEER "PATH=$PATH:$NODEJS_DIR && cd $SRC_DIR && nohup node blockbench/txn-server.js $NETWORK_DIR $ORG_ID $CHANNEL $CC_NAME $MODE 8801 > txn-server-$PEER.log 2>&1 &"
-	ssh $PEER "PATH=$PATH:$NODEJS_DIR && cd $SRC_DIR && nohup node blockbench/block-server.js $NETWORK_DIR $ORG_ID $CHANNEL 8800 > block-server-$PEER.log 2>&1 &"
+	ssh -f $PEER "PATH=$PATH:$NODEJS_DIR && cd $SRC_DIR && nohup node blockbench/txn-server.js $NETWORK_DIR $ORG_ID $CHANNEL $CC_NAME $MODE 8801 > txn-server-$PEER.log 2>&1 &"
+	ssh -f $PEER "PATH=$PATH:$NODEJS_DIR && cd $SRC_DIR && nohup node blockbench/block-server.js $NETWORK_DIR $ORG_ID $CHANNEL 8800 > block-server-$PEER.log 2>&1 &"
 done
