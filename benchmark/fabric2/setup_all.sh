@@ -25,6 +25,11 @@ done
 
 }
 
+function prepare_shared {
+	cd $SRC_DIR && rm -rf $NETWORK_DIR
+	python prepare.py $NETWORK_DIR $CHANNEL $BLOCK_SIZE $ORDERER_COUNT $ORDERERS $PEER_COUNT $PEERS
+}
+
 function deploy {
 
 ./setup_channel.sh $NETWORK_DIR $CHANNEL 5
@@ -40,7 +45,7 @@ ENDORSE_POLICY="AND($(join_by , $ALL_ORG))"
 
 }
 
-# prepare
+prepare_shared
 
 python network.py $NETWORK_DIR on
 
@@ -49,6 +54,6 @@ sleep 30
 deploy
 
 for PEER in $PEERS; do
-	ssh -f $PEER "PATH=$PATH:$NODEJS_DIR && cd $SRC_DIR && nohup node blockbench/txn-server.js $NETWORK_DIR $ORG_ID $CHANNEL $CC_NAME $MODE 8801 > txn-server-$PEER.log 2>&1 &"
-	ssh -f $PEER "PATH=$PATH:$NODEJS_DIR && cd $SRC_DIR && nohup node blockbench/block-server.js $NETWORK_DIR $ORG_ID $CHANNEL 8800 > block-server-$PEER.log 2>&1 &"
+	ssh -f $PEER "PATH=$NODEJS_DIR:$PATH && cd $SRC_DIR && nohup node blockbench/txn-server.js $NETWORK_DIR $ORG_ID $CHANNEL $CC_NAME $MODE 8801 > txn-server-$PEER.log 2>&1 &"
+	ssh -f $PEER "PATH=$NODEJS_DIR:$PATH && cd $SRC_DIR && nohup node blockbench/block-server.js $NETWORK_DIR $ORG_ID $CHANNEL 8800 > block-server-$PEER.log 2>&1 &"
 done

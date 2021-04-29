@@ -1,6 +1,8 @@
 #!/bin/bash
 
-T=120
+. ./env.sh
+
+T=$DURATION
 
 if [ $# -lt 1 ]; then
         echo "Usage: $0 <log dir>"
