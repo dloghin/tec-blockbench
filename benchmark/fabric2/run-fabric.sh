@@ -22,27 +22,16 @@ for TXR in $TXRATES; do
 		$POWER_METER_CMD | tee -a power-$TXR.log > /dev/null &
 		sleep 1
 	fi
-	N=91
-#	CLIENT="slave-91"
-	WDIR=`pwd`
 	for PEER in $PEERS; do
-#		N=$(($N+1))
-#		if [ $N -gt 4 ]; then
-#			CLIENT="slave-93"
-#		fi
-		CLIENT="slave-$N"
-#		N=$(($N+1))
 		for M in `seq 1 $DRIVERS_PER_CLIENT`; do
-			ssh -f $CLIENT "cd $WDIR && $DRIVER -db fabric-v2.2 -threads 1 -P $WORKLOAD -txrate $TXR -endpoint $PEER:8800,$PEER:8801 -wl ycsb -wt 20 > client-$M-$PEER.log 2>&1 &"
+#			ssh -f $CLIENT "cd $WDIR && $DRIVER -db fabric-v2.2 -threads 1 -P $WORKLOAD -txrate $TXR -endpoint $PEER:8800,$PEER:8801 -wl ycsb -wt 20 > client-$M-$PEER.log 2>&1 &"
+			$DRIVER -db fabric-v2.2 -threads 1 -P $WORKLOAD -txrate $TXR -endpoint $PEER:8800,$PEER:8801 -wl ycsb -wt 20 > client-$M-$PEER.log 2>&1 &
 		done
 	done
 	sleep $DURATION
-#	killall -9 driver
-#	ssh slave-93 "killall -9 driver"
-	for N in `seq 91 98`; do
-		CLIENT="slave-$N"
-		ssh $CLIENT "killall -9 driver"
-	done
+	killall -9 driver
+#	ssh $CLIENT "killall -9 driver"
+	
 	# Comment below if you dont have power meter
 	if ! [ -z "$POWER_METER_APP" ]; then
 		killall -SIGINT $POWER_METER_APP
