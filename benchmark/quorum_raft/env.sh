@@ -1,6 +1,6 @@
-QUO_HOME=/git/blockbench/benchmark/quorum_raft
-QUO_DATA=/git/blockbench/benchmark/quorum_raft/data
-GO_PATH=/go
+QUO_HOME=/home/ubuntu/git/blockbench/benchmark/quorum_raft
+QUO_DATA=/home/ubuntu/git/blockbench/benchmark/quorum_raft/data
+GO_PATH=/home/ubuntu/tools/go
 BENCHMARK=ycsb
 EXE_HOME=$QUO_HOME/../../src/macro/kvstore
 # BENCHMARK=smallbank
@@ -9,6 +9,6 @@ EXE_HOME=$QUO_HOME/../../src/macro/kvstore
 #####################################################
 HOSTS=$QUO_HOME/hosts
 CLIENTS=$QUO_HOME/clients
-QUORUM=/git/quorum/build/bin/geth
+QUORUM=/home/ubuntu/git/quorum/build/bin/geth
 ADDRESSES=$QUO_HOME/addresses
-LOG_DIR=$QUO_HOME/logs/${BENCHMARK}results_1
+LOG_DIR=$QUO_HOME/logs
