@@ -14,11 +14,11 @@ OFILE="data-$LOGDIR"
 # TXRATES="5 10 15 20 25 30 35 40"
 # TXRATES="45 50 55 60 65 70"
 # TXRATES="1 5 8 10 15 20 25"
-# TXRATES="1 5 10 15 20 25 30 35 40 45 50 55 60"
+TXRATES="1 5 10 15 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100 105 110 115 120"
 # TXRATES="70 80 90 100 110 120 130 140 150 175 200 225 250"
-TXRATES="1 5 10 15 20 25 30 35 40 45 50 55 60 70 80 90 100 110 120 130 140 150 175 200 225 250"
+# TXRATES="1 5 10 15 20 25 30 35 40 45 50 55 60 70 80 90 100 110 120 130 140 150 175 200 225 250"
 
-echo "# Nodes; Request Rate [tps]; Throughput [tps]; Duration [s]; Block Height; Peak Power [W]; Avg Power [W]" > $OFILE
+echo "# Nodes; Request Rate [tps]; Throughput [tps]; Duration [s]; Block Height; Peak Power [W]; Avg Power [W]; Latency [s]" > $OFILE
 
 for TXR in $TXRATES; do
         ./parse-txrate-one.sh $LOGDIR/logs-$TXR > tmp.txt
@@ -26,9 +26,10 @@ for TXR in $TXRATES; do
         TH=`cat tmp.txt | grep throughput | cut -d ' ' -f 3`
         BH=`cat tmp.txt | grep blk | cut -d ' ' -f 3`
         T=`cat tmp.txt | grep duration | cut -d ' ' -f 4`
+	LAT=`cat tmp.txt | grep Latency | cut -d ' ' -f 3`
         python get-power.py $LOGDIR/power-$TXR.log > tmp.txt
         PP=`cat tmp.txt | cut -d ' ' -f 5`
         AP=`cat tmp.txt | cut -d ' ' -f 7`
-        echo "$NODES;$TXR;$TH;$T;$BH;$PP;$AP" >> $OFILE
+        echo "$NODES;$TXR;$TH;$T;$BH;$PP;$AP;$LAT" >> $OFILE
 done
 

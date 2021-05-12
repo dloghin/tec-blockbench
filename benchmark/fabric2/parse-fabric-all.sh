@@ -11,7 +11,7 @@ OFILE="data-$LOGDIR"
 
 . ./env.sh
 
-echo "# Nodes; Request Rate [tps]; Throughput [tps]; Duration [s]; Block Height; Peak Power [W]; Avg Power [W]" > $OFILE
+echo "# Nodes; Request Rate [tps]; Throughput [tps]; Duration [s]; Block Height; Peak Power [W]; Avg Power [W]; Latency [ms]" > $OFILE
 
 for TXR in $TXRATES; do
 	./parse-fabric-one.sh $LOGDIR/logs-$TXR > tmp.txt
@@ -19,6 +19,7 @@ for TXR in $TXRATES; do
 	TH=`cat tmp.txt | grep throughput | cut -d ' ' -f 3`
 	BH=`cat tmp.txt | grep blk | cut -d ' ' -f 3`
 	T=`cat tmp.txt | grep Duration | cut -d ' ' -f 3`
+	LAT=`cat tmp.txt | grep Latency | cut -d ' ' -f 3`
 	POWER_FILE="$LOGDIR/power-$TXR.log"
 	if ! [ -f "$POWER_FILE" ]; then
 		POWER_FILE="$LOGDIR/logs-$TXR/power-$TXR.log"
@@ -26,5 +27,5 @@ for TXR in $TXRATES; do
 	python get-power.py $POWER_FILE > tmp.txt
 	PP=`cat tmp.txt | cut -d ' ' -f 5`
 	AP=`cat tmp.txt | cut -d ' ' -f 7`
-	echo "$NODES;$TXR;$TH;$T;$BH;$PP;$AP" >> $OFILE
+	echo "$NODES;$TXR;$TH;$T;$BH;$PP;$AP;$LAT" >> $OFILE
 done

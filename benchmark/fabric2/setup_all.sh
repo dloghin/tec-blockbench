@@ -17,10 +17,10 @@ rm -rf $NETWORK_DIR
 python prepare.py $NETWORK_DIR $CHANNEL $BLOCK_SIZE $ORDERER_COUNT $ORDERERS $PEER_COUNT $PEERS
 
 for PEER in $PEERS; do
-	scp -r $NETWORK_DIR $PEER:$SRC_DIR/
+	scp -r $NETWORK_DIR $PEER:$SRC_DIR/ > /dev/null 2>&1
 done
 for ORDERER in $ORDERERS; do
-	scp -r $NETWORK_DIR $ORDERER:$SRC_DIR/
+	scp -r $NETWORK_DIR $ORDERER:$SRC_DIR/ > /dev/null 2>&1
 done
 
 }
@@ -40,12 +40,17 @@ done
 
 function join_by { local d=$1; shift; local f=$1; shift; printf %s "$f" "${@/#/$d}"; }
 ENDORSE_POLICY="AND($(join_by , $ALL_ORG))"
+#ENDORSE_POLICY="OR($(join_by , $ALL_ORG))"
 
 ./deployCC.sh $NETWORK_DIR $CHANNEL $CC_NAME "$ENDORSE_POLICY" "InitLedger" "InitLedger"
 
 }
 
-prepare_shared
+if [ -z "$SHARED" ]; then
+	prepare
+else
+	prepare_shared
+fi
 
 python network.py $NETWORK_DIR on
 
