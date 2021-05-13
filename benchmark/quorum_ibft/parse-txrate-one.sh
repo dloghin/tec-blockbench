@@ -34,12 +34,15 @@ for CLIENT in $CLIENTS; do
 	if ! [ -z "$LATC" ]; then
 		LAT="$LAT+${LATC}0"
 	fi
-	NLC=`wc -l tmp.txt | cut -d ' ' -f 1`
-	NL=$(($NL+$NLC))
+	cat $CLIENT | grep latency | cut -d ' ' -f 8 > tmp.txt
+	NLC=`cat tmp.txt | tr '\n' '+'`
+	if ! [ -z "$NLC" ]; then
+                NL="$NL+${NLC}0"
+        fi
 done
 T=$(($NC*10+240))
 MAXTH=`echo $MAXTXN/$T | bc -l`
-LAT=`echo "($LAT+0)/$NL" | bc -l`
+LAT=`echo "($LAT+0)/($NL+0)" | bc -l`
 rm -f tmp.txt
 
 echo "Nodes: $NODES"
