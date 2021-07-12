@@ -9,7 +9,7 @@ void sleep(double t){
   nanosleep(&req, NULL); 
 }
 
-long time_now(){
+int64_t time_now(){
   timespec ts; 
   clock_gettime(CLOCK_REALTIME, &ts); 
   return (ts.tv_sec*1000000000 + ts.tv_nsec); 
