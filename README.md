@@ -7,6 +7,17 @@ of different system design choices.
 BlockBench comes with both [macro benchmark workloads](src/macro) for evaluating the overall performance and
 [micro benchmark workloads](src/micro) for evaluating performance of individual layers. 
 
+# This branch (analysis2021)
+
+This branch includes updated benchmarks for [Hyperledger Fabric v2+ (e.g., v2.3.1)](benchmark/fabric2) and Quorum (e.g., v20.10.0): [Quorum with Raft](benchmark/quorum_raft) and [Quorum with IBFT](benchmark/quorum_ibft).
+
+## Running Fabric v2+ Benchmarks
+
+## Running Quorum Benchmarks
+
+
+# Other Information
+
 ## Workloads 
 
 ### Macro-benchmark
