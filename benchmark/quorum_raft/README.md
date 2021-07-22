@@ -1,18 +1,97 @@
-# Benchmarking Quorum
+# Benchmarking Guide for Quorum Raft and IBFT
 
-# Running multiple experiments using Python
+1. Prepare Quorum, by compiling version 20.10.0 and note the path of the binary. (e.g., on Raspberry Pi: /home/pi/git/quorum/build/bin/geth).
 
-To avoid manually changing settings in `evn.sh`, one can directly start multiple experiments using the
-following Python scripts:
+2. Prepare blockbench (see below).
 
-1. `config.py` contains several important global variables to be imported to other Python's scripts:
-      + `NODES`: the list of strings representing the server IP addresses.
-      + `parition_cmd`: use to specify the script that simulate parition attacks. 
-      + `TIMEOUT`: 
+## Prepare blockbench
 
-1. `exps.py` 
+Suppose there is a ``git`` folder in user's home on all the nodes. For example, if the user is "pi", then there is a foder ``/home/pi/git``.
 
-2. `partition.py`
+Clone blockbench in ``git`` and use ``analysis2021`` branch on all the nodes, including the clients nodes:
+
+```
+$ cd ~/git
+$ git clone https://github.com/dloghin/blockbench.git
+$ cd blockbench
+$ git checkout analysis2021
+$ cd blockbench/benchmark/quorum_raft
+```
+
+Then, on one of the nodes (let's call it HEAD_NODE) which can act as the client that sends transactions, do the following. Define the hosts (peers) and the clients in [hosts](hosts) and [clients](clients) files, respectively. If using a single client node to send all the requests, you need to repeat the address in the [clients](clients) file to match the number of hosts.
+
+Make sure you use passwordless ssh to connect to all the other nodes (add id_rsa.pub in authorized_keys).
+
+Edit [env.sh](env.sh):
+- QUO_HOME should be the current folder (e.g., on Raspberry Pi: home/pi/git/blockbench/benchmark/quorum_raft).
+- QUORUM is the path to quorum binary (step 1 above).
+
+Run [replace-ip.sh](replace-ip.sh) and [send-config.sh](send-config.sh) to prepare the peer nodes (the parameter is the number of peers you are going to use):
+
+```
+$ ./replace-ip.sh
+$ ./send-config.sh 4
+```
+
+This will also create the proper ``static-nodes.json`` files.
+
+Next, edit [run-txrate.sh](run-txrate.sh):
+- define PEER_COUNT (e.g. PEER_COUNT=4)
+- define POWER_METER_CMD and POWER_METER_APP or comment them if there is no power meter. (POWER_METER_APP is used in killall).
+- if you run the benchmark from a machine different from the HEAD_NODE client node (as above), define HEAD_NODE=<addr>. Otherwise comment it.
+- define the TXRATES (all the send rates that the benchmark will be executed with).
+- make sure you have dstat installed on all the systems.
+
+Next, make sure the kvstore client is compiled on the client node(s):
+
+```
+$ cd ~/git/blockbench/src/macro/kvstore
+$ make clean
+$ make
+```
+
+You should get a driver binary.
+
+## Run the benchmark
+
+Now, you are ready to run:
+
+```
+$ cd ~/git/blockbench/benchmark/quorum_raft
+$ ./run-txrate.sh
+```
+
+After running, you will get a folder with a timestamp suffix, such as "quorum-raft-4-logs-2021-05-06-06-35-42". You can use [parse-txrate-all.sh](parse-txrate-all.sh) to parse it, but make sure the TXRATES defined in [run-txrate.sh](run-txrate.sh) is the same as the TXRATES in [parse-txrate-all.sh](parse-txrate-all.sh):
+
+```
+$ ./parse-txrate-all.sh quorum-raft-4-logs-2021-05-06-06-35-42
+$ cat data-quorum-raft-4-logs-2021-05-06-06-35-42
+# Nodes; Request Rate [tps]; Throughput [tps]; Duration [s]; Block Height; Peak Power [W]; Avg Power [W]; Latency [s]
+10;1;6.22352941176470588235;340;108;0.0;0.0;12.00090555028462998102
+10;5;30.48823529411764705882;340;110;0.0;0.0;12.21233730810286268801
+10;10;59.33235294117647058823;340;109;0.0;0.0;12.63181380800953989863
+10;15;86.87647058823529411764;340;109;0.0;0.0;13.01713436989657049537
+...
+```
+
+IBFT - all the steps for Raft apply for IBFT, just that you need to use the folder: [blockbench/benchmark/quorum_ibft](blockbench/benchmark/quorum_ibft).
+
+## Networking benchmarks
+
+To limit the networking bandwidth on a node, use ``tc``. E.g., to limit the bandwidth to 200Mbps:
+
+```
+$ sudo tc qdisc add dev ens5 root tbf rate 200mbit burst 2mbit latency 400ms
+```
+
+To remove the limit:
+
+```
+$ sudo tc qdisc del dev ens5 root
+```
+
+
+# Detailed Information
 
 ## Parameters
 There are a number of global variables that are to be set in `env.sh`:

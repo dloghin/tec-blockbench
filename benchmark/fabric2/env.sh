@@ -4,7 +4,7 @@
 #PEER_COUNT=$1
 #ORDERER_COUNT=$2
 
-PEER_COUNT=8
+PEER_COUNT=10
 ORDERER_COUNT=1
 
 # On CIIDAA
@@ -15,31 +15,27 @@ ORDERER_COUNT=1
 #FABRIC_DATA_DIR="/data/dumi/fabric_data"
 
 # On Jetson & AWS
-#SRC_DIR="/home/ubuntu/git/blockbench/benchmark/fabric2"
+SRC_DIR="/home/ubuntu/git/blockbench/benchmark/fabric2"
 # ! For x64
-#NODEJS_DIR="/home/ubuntu/tools/node-v14.16.1-linux-x64/bin"
+NODEJS_DIR="/home/ubuntu/tools/node-v14.16.1-linux-x64/bin"
 # ! For ARM64 (aarch64)
 #NODEJS_DIR="/home/ubuntu/tools/node-v14.16.1-linux-arm64/bin"
-#DRIVER="/home/ubuntu/git/blockbench/src/macro/kvstore/driver"
-#WORKLOAD="/home/ubuntu/git/blockbench/src/macro/kvstore/workloads/workloada.spec"
-#FABRIC_DATA_DIR="/home/ubuntu/fabric_data"
+DRIVER="/home/ubuntu/git/blockbench/src/macro/kvstore/driver"
+WORKLOAD="/home/ubuntu/git/blockbench/src/macro/kvstore/workloads/workloada.spec"
+FABRIC_DATA_DIR="/home/ubuntu/fabric_data"
 
 # On Docker
-SRC_DIR="/git/blockbench/benchmark/fabric2"
-NODEJS_DIR="/tools/node-v14.16.1-linux-x64/bin"
-DRIVER="/git/blockbench/src/macro/kvstore/driver"
-WORKLOAD="/git/blockbench/src/macro/kvstore/workloads/workloada.spec"
-USER="root"
-FABRIC_DATA_DIR="/fabric_data"
+# SRC_DIR="/git/blockbench/benchmark/fabric2"
+#NODEJS_DIR="/tools/node-v14.16.1-linux-x64/bin"
+#DRIVER="/git/blockbench/src/macro/kvstore/driver"
+#WORKLOAD="/git/blockbench/src/macro/kvstore/workloads/workloada.spec"
+#USER="root"
+#FABRIC_DATA_DIR="/fabric_data"
 
 # Driver runtime duration (seconds)
 DURATION=120
 
-# TXRATES="5 10 15 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100"
-TXRATES="5 10 15 20 25 30 35 40 45 50 55 60"
-# TXRATES="50 75 100 125 150 175 200 225 250"
-# TXRATES="5 20 40 60 80 100 200 300 400 500"
-# TXRATES="200"
+TXRATES="5 10 15 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100"
 
 DRIVERS_PER_CLIENT=16
 
@@ -59,7 +55,8 @@ ALL_ORG=""
 MODE=open_loop
 ORG_ID=1
 
-# You may edit the following to match your setup
+# You may edit the following to match your setup.
+# On AWS, just put all the private IPs of the instances in PEERS.
 PEERS=""
 START_IDX=2
 END_IDX=$(($START_IDX+$PEER_COUNT-1))

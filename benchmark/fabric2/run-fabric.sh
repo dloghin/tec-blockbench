@@ -32,7 +32,7 @@ for TXR in $TXRATES; do
 	killall -9 driver
 #	ssh $CLIENT "killall -9 driver"
 	
-	# Comment below if you dont have power meter
+	# Comment below if you don't have power meter
 	if ! [ -z "$POWER_METER_APP" ]; then
 		killall -SIGINT $POWER_METER_APP
 	fi

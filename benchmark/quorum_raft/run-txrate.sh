@@ -8,7 +8,7 @@ TSTAMP=`date +%F-%H-%M-%S`
 LOGDIR="quorum-raft-$PEER_COUNT-logs-$TSTAMP"
 
 # Power 
-#POWER_METER_iCMD="rdserial /dev/ttyS0"
+#POWER_METER_CMD="rdserial /dev/ttyS0"
 #POWER_METER_APP="rdserial"
 
 # dstat

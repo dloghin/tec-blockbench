@@ -1,16 +1,34 @@
+# Benchmarking Guide for Fabric
 
-# Overview
-This mini-project is a minimum-working-prototype(MVP) which demonstrates the basic functionality of Fabric v2.2. In this MVP, we use the latest commands and APIs to setup channels, manage contracts (chaincodes) and perform interaction. 
-Our demonstration operates on ciidaa cluster. 
+This folder contains the ncesessary scripts to benchmark Hyperledger Fabric v2+. We tested it with Fabric v2.3.1.
 
-## Note
-* `./bin/peer` process is lightly instrumented to print timer logs, which is used to collect measurements. Refer to the commit `e4dbba552` on branch `my-v2.2` in my [repo](https://github.com/RUAN0007/FabricSharpSigmod/tree/my-v2.2) for the instrumented codebase. 
+Steps to run the benchmark:
 
-# Prerequisite
-* _docker_ with version `18.06.3-ce` or later.
-* _python_ with version `2.7.x`
-* _golang_ with version `1.14.x`
-* _node_ with version `12.13.x`
+1. Prepare Fabric on each node: clone [Fabric code](https://github.com/hyperledger/fabric), build the binaries and the Docker images.
+
+Make sure you have the following binaries in ``build/bin``:
+
+```
+$ ls build/bin/
+configtxgen  configtxlator  cryptogen  discover  idemixgen  orderer  osnadmin  peer
+```
+
+Then copy these binaries in a ``bin`` folder under 	``benchmark/fabric2/``. This repository includes the binaries for x86/64 and aarch64 (see [bin-x64-v2.3.1](bin-x64-v2.3.1) and [bin-arm64-v2.3.1](bin-arm64-v2.3.1)).
+
+2. Prepare blockbench:
+
+-> change [env.sh](env.sh) to match your setup. 
+
+-> run [setup_all.sh](setup_all.sh) to start fabric
+
+-> run benchmark with [run-fabric.sh](run-fabric.sh).
+
+
+## Prerequisites
+* _docker_  with version `18.06.3-ce` or later.
+* _python_  with version `2.7.x`
+* _golang_  with version `1.14.x`
+* _node_  with version `12.13.x`
 * On each peer node, pull the docker images `docker pull hyperledger/fabric-ccenv:latest`. 
 
 # Preparation
