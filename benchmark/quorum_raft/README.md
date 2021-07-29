@@ -90,6 +90,13 @@ To remove the limit:
 $ sudo tc qdisc del dev ens5 root
 ```
 
+## Perf profiling
+
+To profile the execution of Fabric with ``perf``, make sure you have ``perf`` installed on each node. You need to install the ``linux-tools-xxx-generic`` corresponding to your kernel.
+
+For ``perf record``, run ``perf record -a -g`` on each node. You can remove the comment of the ``perf record`` line in [start-mining.sh](start-mining.sh).
+
+To get the number of CPU cores uses, run with ``perf stat``. For cache misses, we use the following events: ``-e instructions -e LLC-load-misses -e LLC-loads -e LLC-store-misses -e LLC-stores -e cache-misses -e cache-references``.
 
 # Detailed Information
 

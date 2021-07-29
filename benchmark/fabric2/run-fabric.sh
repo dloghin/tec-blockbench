@@ -17,6 +17,14 @@ for TXR in $TXRATES; do
 	for PEER in $PEERS; do
 		ssh $PEER "killall -9 dstat; sleep 3; rm -f dstat-$PEER.log"
 		ssh $PEER "dstat -t -c -d --disk-tps -m -n --integer --noheader --nocolor --output dstat-$PEER.log > /dev/null" &
+		# Uncomment below to run perf record
+		# ssh -f $PEER "nohup perf record -a -g -p \`ps aux | grep 'peer node start' | grep -v grep | head -n 1 | tr -s ' ' | cut -d ' ' -f 2\` -o $CDIR/perf-$PEER.dat"
+		# Uncomment one of the below line for cache misses
+		# ssh -f $PEER "nohup perf stat -e instructions -e LLC-load-misses -e LLC-loads -a -p \`ps aux | grep 'peer node start' | grep -v grep | head -n 1 | tr -s ' ' | cut -d ' ' -f 2\` -o $CDIR/perf-stat-$PEER.txt"
+        # ssh -f $PEER "nohup perf stat -e instructions -e LLC-store-misses -e LLC-stores -a -p \`ps aux | grep 'peer node start' | grep -v grep | head -n 1 | tr -s ' ' | cut -d ' ' -f 2\` -o $CDIR/perf-stat-$PEER.txt"
+        # ssh -f $PEER "nohup perf stat -e instructions -e cache-misses -e cache-references -a -p \`ps aux | grep 'peer node start' | grep -v grep | head -n 1 | tr -s ' ' | cut -d ' ' -f 2\` -o $CDIR/perf-stat-$PEER.txt"
+        # Uncomment below for generic perf stat, including the number of cores used
+        # ssh -f $PEER "nohup perf stat -a -p \`ps aux | grep 'peer node start' | grep -v grep | head -n 1 | tr -s ' ' | cut -d ' ' -f 2\` -o $CDIR/perf-stat-$PEER.txt"
 	done
 	if ! [ -z "$POWER_METER_CMD" ]; then
 		$POWER_METER_CMD | tee -a power-$TXR.log > /dev/null &

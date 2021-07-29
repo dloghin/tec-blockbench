@@ -17,12 +17,33 @@ Then copy these binaries in a ``bin`` folder under 	``benchmark/fabric2/``. This
 
 2. Prepare blockbench:
 
--> change [env.sh](env.sh) to match your setup. 
+-> change [env.sh](env.sh) to match your setup. For example, set ``PEER_COUNT`` and ``ORDERER_COUNT`` to change the number of peers and orderers. 
 
--> run [setup_all.sh](setup_all.sh) to start fabric
+-> run [setup_all.sh](setup_all.sh) to start fabric. You may also change the endorsement policy by setting ``ENDORSE_POLICY=...``.
 
 -> run benchmark with [run-fabric.sh](run-fabric.sh).
 
+## Networking benchmarks
+
+To limit the networking bandwidth on a node, use ``tc``. E.g., to limit the bandwidth to 200Mbps:
+
+```
+$ sudo tc qdisc add dev ens5 root tbf rate 200mbit burst 2mbit latency 400ms
+```
+
+To remove the limit:
+
+```
+$ sudo tc qdisc del dev ens5 root
+```
+
+## Perf profiling
+
+To profile the execution of Fabric with ``perf``, make sure you have ``perf`` installed on each node. You need to install the ``linux-tools-xxx-generic`` corresponding to your kernel.
+
+For ``perf record``, run ``perf record -a -g -p $PID`` on each node, where ``$PID`` is the pid of Fabric's peer on each node. You can remove the comment of the ``perf record`` line in [run-fabric.sh](run-fabric.sh).
+
+To get the number of CPU cores uses, run with ``perf stat``. For cache misses, we use the following events: ``-e instructions -e LLC-load-misses -e LLC-loads -e LLC-store-misses -e LLC-stores -e cache-misses -e cache-references``.
 
 ## Prerequisites
 * _docker_  with version `18.06.3-ce` or later.
