@@ -7,7 +7,7 @@ of different system design choices.
 BlockBench comes with both [macro benchmark workloads](src/macro) for evaluating the overall performance and
 [micro benchmark workloads](src/micro) for evaluating performance of individual layers. 
 
-# This branch (analysis2021) - ICDE submission
+# This branch (analysis2021) - submission to IEEE Transactions on Cloud Computing
 
 This branch includes updated benchmarks for Hyperledger Fabric v2+ (e.g., v2.3.1) and Quorum (e.g., v20.10.0): Quorum with Raft and Quorum with IBFT.
 
