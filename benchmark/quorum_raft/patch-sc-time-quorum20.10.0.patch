@@ -1,0 +1,26 @@
+diff --git a/core/state_transition.go b/core/state_transition.go
+index 662c3e2ba..6c81be417 100644
+--- a/core/state_transition.go
++++ b/core/state_transition.go
+@@ -18,8 +18,10 @@ package core
+ 
+ import (
+ 	"errors"
++	"fmt"
+ 	"math"
+ 	"math/big"
++	"time"
+ 
+ 	"github.com/ethereum/go-ethereum/common"
+ 	"github.com/ethereum/go-ethereum/core/state"
+@@ -281,7 +283,10 @@ func (st *StateTransition) TransitionDb() (ret []byte, usedGas uint64, failed bo
+ 			return nil, 0, false, nil
+ 		}
+ 
++		start := time.Now()
+ 		ret, leftoverGas, vmerr = evm.Call(sender, to, data, st.gas, st.value)
++		elapsed := time.Since(start)
++		log.Info("EVM call took ", "time", fmt.Sprintf("%v", elapsed))
+ 	}
+ 	if vmerr != nil {
+ 		log.Info("VM returned with error", "err", vmerr)

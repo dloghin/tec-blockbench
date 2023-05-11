@@ -1,0 +1,17 @@
+diff --git a/core/endorser/endorser.go b/core/endorser/endorser.go
+index a7a857b1b..a49b6d80f 100644
+--- a/core/endorser/endorser.go
++++ b/core/endorser/endorser.go
+@@ -107,8 +107,10 @@ func (e *Endorser) callChaincode(txParams *ccprovider.TransactionParams, input *
+ 	defer func(start time.Time) {
+ 		logger := endorserLogger.WithOptions(zap.AddCallerSkip(1))
+ 		logger = decorateLogger(logger, txParams)
+-		elapsedMillisec := time.Since(start).Milliseconds()
+-		logger.Infof("finished chaincode: %s duration: %dms", chaincodeName, elapsedMillisec)
++//		elapsedMillisec := time.Since(start).Milliseconds()
++//		logger.Infof("finished chaincode: %s duration: %dms", chaincodeName, elapsedMillisec)
++		elapsedUs := time.Since(start).Microseconds()
++		logger.Infof("finished chaincode: %s duration: %d us", chaincodeName, elapsedUs)
+ 	}(time.Now())
+ 
+ 	meterLabels := []string{
