@@ -29,7 +29,7 @@ Edit [env.sh](env.sh):
 Run [replace-ip.sh](replace-ip.sh) and [send-config.sh](send-config.sh) to prepare the peer nodes (the parameter is the number of peers you are going to use):
 
 ```
-$ ./replace-ip.sh
+$ ./replace-ip.sh raft/static-nodes<N>.json
 $ ./send-config.sh 4
 ```
 
