@@ -14,6 +14,7 @@
 #include "core_workload.h"
 
 #include <string>
+#include <iostream>
 
 using ycsbc::CoreWorkload;
 using std::string;
@@ -78,6 +79,9 @@ void CoreWorkload::Init(const utils::Properties &p) {
   
   field_count_ = std::stoi(p.GetProperty(FIELD_COUNT_PROPERTY,
                                          FIELD_COUNT_DEFAULT));
+
+  std::cout << "YCSB Filed Count: " << field_count_ << std::endl;
+
   field_len_generator_ = GetFieldLenGenerator(p);
   
   double read_proportion = std::stod(p.GetProperty(READ_PROPORTION_PROPERTY,
