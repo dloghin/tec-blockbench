@@ -96,4 +96,4 @@ To profile the execution of Fabric with ``perf``, make sure you have ``perf`` in
 
 For ``perf record``, run ``perf record -a -g`` on each node. You can remove the comment of the ``perf record`` line in [start-mining.sh](start-mining.sh).
 
-To get the number of CPU cores uses, run with ``perf stat``. For cache misses, we use the following events: ``-e instructions -e LLC-load-misses -e LLC-loads -e LLC-store-misses -e LLC-stores -e cache-misses -e cache-references``.
+To get the number of CPU cores used, run with ``perf stat``. For cache misses, we use the following events: ``-e instructions -e LLC-load-misses -e LLC-loads -e LLC-store-misses -e LLC-stores -e cache-misses -e cache-references``.
