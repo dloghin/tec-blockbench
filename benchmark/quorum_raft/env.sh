@@ -5,6 +5,7 @@ BENCHMARK=ycsb
 EXE_HOME=$QUO_HOME/../../src/macro/kvstore
 # BENCHMARK=smallbank
 # EXE_HOME=$QUO_HOME/../../src/macro/smallbank
+WORKLOAD="/home/ubuntu/git/blockbench/src/macro/kvstore/workloads/workloada.spec"
 
 #####################################################
 HOSTS=$QUO_HOME/hosts
