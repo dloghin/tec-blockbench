@@ -1,15 +1,15 @@
-# BlockBench
+# Time-Energy-Cost Benchmarking of Blockchain Systems 
 
-BlockBench is the first benchmarking framework for private blockchain systems.
-It serves as a fair means of comparison for different platforms and enables deeper understanding
-of different system design choices.
+This repository is based on [**BlockBench**](https://github.com/ooibc88/blockbench), the first benchmarking framework for permissioned blockchain systems. Different from the original BlockBench, this repository:
 
-BlockBench comes with both [macro benchmark workloads](src/macro) for evaluating the overall performance and
-[micro benchmark workloads](src/micro) for evaluating performance of individual layers. 
+- adds benchmarking support for Fabric 2+ (e.g., v2.3.1) and Quorum (e.g., v20.10.0).
+- adds system-level benchmarks (in [benchmark/systems_benchmarks](benchmark/systems_benchmarks))
+- adds scripts to do profiling (with Linux ``perf``)
+- adds scripts to capture and parse power and energy
 
-# This branch (analysis2021) - submission to IEEE Transactions on Cloud Computing
+## Experiments Reproducibility
 
-This branch includes updated benchmarks for Hyperledger Fabric v2+ (e.g., v2.3.1) and Quorum (e.g., v20.10.0): Quorum with Raft and Quorum with IBFT.
+Please see [Benchmarking.md](Benchmarking.md) on how to reproduce the experiments presented in the paper *"Characterizing the Performance and Cost of Blockchains on the Cloud and at the Edge"*.
 
 ## Running Fabric v2+ Benchmarks
 
@@ -76,3 +76,7 @@ Go to [micro](src/micro) directory and use `npm install` to install the dependen
 * [geth(parity)](https://github.com/paritytech/parity/wiki/Setup)
 * [geth(quorum)](https://github.com/jpmorganchase/quorum/wiki/Getting-Set-Up)
 * [hyperledger](https://github.com/hyperledger/fabric/tree/v0.6)
+
+## Issues
+
+For any issues, please open an issue in Github [here](https://github.com/dloghin/tec-blockbench/issues).
