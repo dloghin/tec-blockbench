@@ -1,0 +1,5 @@
+torch
+torchvision
+pysha3
+requests
+web3==5.15.0

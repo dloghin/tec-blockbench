@@ -1,0 +1,167 @@
+[
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "taskId",
+				"type": "uint64"
+			},
+			{
+				"name": "round",
+				"type": "uint64"
+			},
+			{
+				"name": "modelHash",
+				"type": "string"
+			}
+		],
+		"name": "SetPartialModelHash",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint64"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "taskId",
+				"type": "uint64"
+			},
+			{
+				"name": "round",
+				"type": "uint64"
+			},
+			{
+				"name": "paramsHash",
+				"type": "string"
+			}
+		],
+		"name": "SetPartialParamsHash",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint64"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "taskId",
+				"type": "uint64"
+			},
+			{
+				"name": "round",
+				"type": "uint64"
+			},
+			{
+				"name": "node",
+				"type": "address"
+			}
+		],
+		"name": "GetPartialParamsHash",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "taskId",
+				"type": "uint64"
+			},
+			{
+				"name": "round",
+				"type": "uint64"
+			}
+		],
+		"name": "GetPartialModelHash",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "modelName",
+				"type": "string"
+			},
+			{
+				"name": "modelHash",
+				"type": "string"
+			},
+			{
+				"name": "rounds",
+				"type": "uint64"
+			},
+			{
+				"name": "aggr",
+				"type": "address"
+			},
+			{
+				"name": "addrs",
+				"type": "address[]"
+			}
+		],
+		"name": "CreateBDVFLTask",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "taskId",
+				"type": "uint64"
+			}
+		],
+		"name": "GetInitialModelHash",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "_taskId",
+				"type": "uint64"
+			}
+		],
+		"name": "TaskIdEvent",
+		"type": "event"
+	}
+]
